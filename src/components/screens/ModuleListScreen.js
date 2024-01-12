@@ -1,21 +1,50 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {Pressable, ScrollView, StyleSheet,Text, View } from 'react-native';
+import Screen from '../layout/Screen';
+
+import initialModules from '../../data/modules.js'
 
 const ModuleListScreen = () => {
+  // Initialisations ---------------------
+  const modules = initialModules;
+  // State -------------------------------
+  // Handlers ----------------------------
+ const handleSelect = ()=>{alert("Item Selected")};
+  // View --------------------------------
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <Screen>  
+        <ScrollView style= {styles.container}>
+        {
+          modules.map((module) => {
+            return(
+              <Pressable key={module.ModuleCode} onPress ={handleSelect}>
+                <View style= {styles.item}>
+                  <Text style= {styles.text}>{module.ModuleCode} {module.ModuleName}</Text>
+                </View> 
+              </Pressable>
+              
+
+            )
+          })
+        }
+        </ScrollView>
+      </Screen> 
+      
+      
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  container: {},
+
+  item: {
+    paddingVertical:15,
+    borderTopWidth: 1,
+    borderColor: 'lightgray',
+  },
+
+  text:{
+    ontSize:16,
   },
 });
 
