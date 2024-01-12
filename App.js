@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+import { NavigationContainer} from '@react-navigation/native-stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ModuleListScreen from './src/components/screens/ModuleListScreen';
+
+const Stack = createNativeStackNavigator();
+
+
+  const App = () =>{
+   // Initialisations ---------------------
+  // State -------------------------------
+  // Handlers ----------------------------
+  // View --------------------------------
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator intialRouteName = 'ModuleScreen'>
+        <Stack.Screen
+        name='ModuleListScreen'
+        component={ModuleListScreen}
+        options={{title: 'List modules'}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
