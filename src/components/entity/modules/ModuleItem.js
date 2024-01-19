@@ -1,5 +1,4 @@
 import {Pressable, StyleSheet,Text, View } from 'react-native';
-
 const ModuleItem = ({module, onSelect}) =>{
     // Initialisations ---------------------
     // State -------------------------------
@@ -22,8 +21,9 @@ const styles = StyleSheet.create({
       },
     
       text:{
-        ontSize:16,
+        fontSize:16,
       }
 })
+
 
 export default ModuleItem;
