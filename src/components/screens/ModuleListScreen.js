@@ -15,15 +15,22 @@ const ModuleListScreen = ({navigation}) => {
  
   const handleDelete = (module) =>  setModules(modules.filter((item)=>{ return( item.ModuleID !== module.ModuleID)}))
 
+  const handleAdd = (module) => {setModules([...modules, module])}
+
   const onDelete = (module) =>{
     handleDelete(module);
     navigation.goBack();
   }
 
-  const handleAdd = () => {navigation.navigate('ModuleAddScreen',{})}
+  const onAdd = (module) =>{
+    handleAdd(module);
+    navigation.goBack();
+  }
+ 
 
 
-  const handleSelect = (module) => {navigation.navigate('ModuleViewScreen',{module, onDelete})}
+  const gotToViewScreen = (module) => {navigation.navigate('ModuleViewScreen',{module, onDelete})}
+  const goToAddScreen = () => {navigation.navigate('ModuleAddScreen',{onAdd})}
 
 
  
@@ -32,9 +39,9 @@ const ModuleListScreen = ({navigation}) => {
   return (
       <Screen>
         <Action.ButtonTray>
-          <Action.AddButton onClick={handleAdd}/>
+          <Action.AddButton onClick={goToAddScreen}/>
         </Action.ButtonTray>
-          <ModuleList modules={modules} onSelect={handleSelect}/>
+          <ModuleList modules={modules} onSelect={gotToViewScreen}/>
       </Screen>
   );
 }

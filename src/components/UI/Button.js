@@ -37,6 +37,11 @@ const AddButton = ({onClick}) => {
     )
 };
 
+const CancelButton = ({onClick}) => {
+    return(
+        <Button icon={<Icons.Cancel/>} onClick={onClick} label="Cancel" />
+    )
+};
 
 const styles = StyleSheet.create({
     buttonTray: {
@@ -66,5 +71,6 @@ Action.ButtonTray = ButtonTray;
 Action.EditButton = EditButton;
 Action.DeleteButton = DeleteButton;
 Action.AddButton = AddButton;
+Action.CancelButton = CancelButton;
 
 export default Action;
