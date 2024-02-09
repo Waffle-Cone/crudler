@@ -1,20 +1,19 @@
-import { useState } from "react";
-import { LogBox, StyleSheet } from "react-native";
+import { useState, useEffect } from "react";
+import { ActivityIndicator, LogBox, StyleSheet } from "react-native";
 import Screen from "../layout/Screen";
-import initialModules from "../../data/modules.js";
 import ModuleList from "../entity/modules/ModuleList";
-import RenderCount from "../UI/renderCount";
 import Action from "../UI/Button";
+import useLoad from "../API/useLoad";
 
 const ModuleListScreen = ({ navigation }) => {
   // Initialisations ---------------------
-  LogBox.ignoreLogs([
-    "Non-serializable values were found in the navigation state",
-  ]);
-  // State -------------------------------
-  const [modules, setModules] = useState(initialModules);
-  // Handlers ----------------------------
+  LogBox.ignoreLogs(["Non-serializable values were found in the navigation state"]);
+  const modulesEndpoint = `https://softwarehub.uk/unibase/api/modules`;
 
+  // State -------------------------------
+  const [modules, setModules, isLoading, loadRecords] = useLoad(modulesEndpoint);
+
+  // Handlers ----------------------------
   const handleDelete = (module) =>
     setModules(
       modules.filter((item) => {
@@ -26,12 +25,7 @@ const ModuleListScreen = ({ navigation }) => {
     setModules([...modules, module]);
   };
 
-  const handleModify = (updateModule) =>
-    setModules(
-      modules.map((module) =>
-        module.ModuleID === updateModule.ModuleID ? updateModule : module
-      )
-    );
+  const handleModify = (updateModule) => setModules(modules.map((module) => (module.ModuleID === updateModule.ModuleID ? updateModule : module)));
 
   const onDelete = (module) => {
     handleDelete(module);
@@ -61,11 +55,17 @@ const ModuleListScreen = ({ navigation }) => {
       <Action.ButtonTray>
         <Action.AddButton onClick={goToAddScreen} />
       </Action.ButtonTray>
+      {isLoading ? <ActivityIndicator size="large" color="#4CCBD0" style={styles.loading} /> : null}
       <ModuleList modules={modules} onSelect={gotToViewScreen} />
     </Screen>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  loading: {
+    flex: 1,
+    justifyContent: "center",
+  },
+});
 
 export default ModuleListScreen;
