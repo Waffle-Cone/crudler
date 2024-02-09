@@ -1,7 +1,8 @@
 import { StyleSheet } from "react-native";
-import ModuleView from "../entity/modules/ModuleView";
-import Screen from "../layout/Screen";
-const ModuleViewScreen = ({ navigation, route }) => {
+
+import Screen from "../../layout/Screen";
+
+const UserViewScreen = ({ navigation, route }) => {
   // Initialisations ---------------------
   const { module, onDelete, onModify } = route.params;
 
@@ -13,15 +14,11 @@ const ModuleViewScreen = ({ navigation, route }) => {
 
   return (
     <Screen>
-      <ModuleView
-        module={module}
-        onDelete={onDelete}
-        onModify={gotToModifyScreen}
-      />
+      <ModuleView module={module} onDelete={onDelete} onModify={gotToModifyScreen} />
     </Screen>
   );
 };
 
 const styles = StyleSheet.create({});
 
-export default ModuleViewScreen;
+export default UserViewScreen;

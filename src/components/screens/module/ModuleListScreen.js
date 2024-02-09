@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { ActivityIndicator, LogBox, StyleSheet } from "react-native";
-import Screen from "../layout/Screen";
-import ModuleList from "../entity/modules/ModuleList";
-import Action from "../UI/Button";
-import useLoad from "../API/useLoad";
+import Screen from "../../layout/Screen";
+import ModuleList from "../../entity/modules/ModuleList";
+import Action from "../../UI/Button";
+import useLoad from "../../API/useLoad";
 
 const ModuleListScreen = ({ navigation }) => {
   // Initialisations ---------------------

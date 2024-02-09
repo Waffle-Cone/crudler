@@ -1,6 +1,6 @@
 import { Text } from "react-native";
-import ModuleForm from "../entity/modules/ModuleForm";
-import Screen from "../layout/Screen";
+import ModuleForm from "../../entity/modules/ModuleForm";
+import Screen from "../../layout/Screen";
 
 const ModuleModifyScreen = ({ navigation, route }) => {
   // Initialisations ---------------------
@@ -10,11 +10,7 @@ const ModuleModifyScreen = ({ navigation, route }) => {
   const handleCancel = navigation.goBack;
   return (
     <Screen>
-      <ModuleForm
-        selectedModule={module}
-        onCancel={handleCancel}
-        onSubmit={onModify}
-      />
+      <ModuleForm selectedModule={module} onCancel={handleCancel} onSubmit={onModify} />
     </Screen>
   );
 };

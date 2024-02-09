@@ -1,15 +1,15 @@
 import { ScrollView, StyleSheet } from "react-native";
-import ModuleItem from "./ModuleItem";
+import UserItem from "./UserItem";
 
-const ModuleList = ({ modules, onSelect }) => {
+const UserList = ({ users, onSelect }) => {
   // Initialisations ---------------------
   // State -------------------------------
   // Handlers ----------------------------
   // View --------------------------------
   return (
     <ScrollView style={styles.container}>
-      {modules.map((module) => {
-        return <ModuleItem key={module.ModuleID} module={module} onSelect={onSelect} />;
+      {users.map((user) => {
+        return <UserItem key={user.UserID} user={user} onSelect={onSelect} />;
       })}
     </ScrollView>
   );
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
   container: {},
 });
 
-export default ModuleList;
+export default UserList;
