@@ -1,16 +1,15 @@
-import { Text } from "react-native";
-
+import UserForm from "../../entity/users/UserForm";
 import Screen from "../../layout/Screen";
 
 const UserModifyScreen = ({ navigation, route }) => {
   // Initialisations ---------------------
-  const { module, onModify } = route.params;
+  const { user, onModify } = route.params;
   // State -------------------------------
   // Handlers ----------------------------
   const handleCancel = navigation.goBack;
   return (
     <Screen>
-      <ModuleForm selectedModule={module} onCancel={handleCancel} onSubmit={onModify} />
+      <UserForm selectedUser={user} onCancel={handleCancel} onSubmit={onModify} />
     </Screen>
   );
 };

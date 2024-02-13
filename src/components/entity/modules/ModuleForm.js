@@ -38,12 +38,12 @@ const ModuleForm = ({ selectedModule, onCancel, onSubmit, submitType }) => {
 
   return (
     <Form submitType={submitType} onSubmit={handleSubmit} onCancel={onCancel}>
-      <Form.InputText label={"Module code"} value={module.ModuleCode} onChange={(value) => handleChange("ModuleCode", value)} />
-      <Form.InputText label={"Module name"} value={module.ModuleName} onChange={(value) => handleChange("ModuleName", value)} />
-      <Form.InputSelect label="Module level" prompt="Select module level..." options={levels} value={module.ModuleLevel} onChange={(value) => handleChange("ModuleLevel", value)} />
+      <Form.InputText label={"Module Code"} value={module.ModuleCode} onChange={(value) => handleChange("ModuleCode", value)} />
+      <Form.InputText label={"Module Name"} value={module.ModuleName} onChange={(value) => handleChange("ModuleName", value)} />
+      <Form.InputSelect label="Module Level" prompt="Select module level" options={levels} value={module.ModuleLevel} onChange={(value) => handleChange("ModuleLevel", value)} />
 
-      <Form.InputText label={"Module leader"} value={module.ModuleLeaderName} onChange={(value) => handleChange("ModuleLeaderName", value)} />
-      <Form.InputText label={"Module image URL"} value={module.ModuleImageURL} onChange={(value) => handleChange("ModuleImageURL", value)} />
+      <Form.InputText label={"Module Leader"} value={module.ModuleLeaderName} onChange={(value) => handleChange("ModuleLeaderName", value)} />
+      <Form.InputText label={"Module Image URL"} value={module.ModuleImageURL} onChange={(value) => handleChange("ModuleImageURL", value)} />
     </Form>
   );
 };

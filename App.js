@@ -17,8 +17,8 @@ const Drawer = createDrawerNavigator();
 
 const Panel = () => {
   return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Moduls" component={ModuleListScreen} />
+    <Drawer.Navigator initialRouteName="Modules">
+      <Drawer.Screen name="Modules" component={ModuleListScreen} />
       <Drawer.Screen name="Users" component={UserListScreen} />
     </Drawer.Navigator>
   );
@@ -40,14 +40,12 @@ const App = () => {
       >
         <Stack.Group>
           <Stack.Screen name="Panel" component={Panel} options={{ headerShown: false }} />
-          <Stack.Screen name="ModuleListScreen" component={ModuleListScreen} options={{ title: "List modules" }} />
           <Stack.Screen name="ModuleAddScreen" component={ModuleAddScreen} options={{ title: "Add modules" }} />
           <Stack.Screen name="ModuleModifyScreen" component={ModuleModifyScreen} options={{ title: "Modfiy modules" }} />
           <Stack.Screen name="ModuleViewScreen" component={ModuleViewScreen} options={{ title: "View modules" }} />
         </Stack.Group>
 
         <Stack.Group>
-          <Stack.Screen name="UserListScreen" component={UserListScreen} options={{ title: "List user" }} />
           <Stack.Screen name="UserAddScreen" component={UserAddScreen} options={{ title: "Add user" }} />
           <Stack.Screen name="UserModifyScreen" component={UserModifyScreen} options={{ title: "Modfiy user" }} />
           <Stack.Screen name="UserViewScreen" component={UserViewScreen} options={{ title: "View user" }} />

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-
+import UserForm from "../../entity/users/UserForm";
 import Screen from "../../layout/Screen";
 
 const UserAddScreen = ({ navigation, route }) => {
@@ -12,7 +12,7 @@ const UserAddScreen = ({ navigation, route }) => {
   // View --------------------------------
   return (
     <Screen>
-      <ModuleForm onCancel={handleCancel} onSubmit={onAdd} submitType={"Add"} />
+      <UserForm onCancel={handleCancel} onSubmit={onAdd} submitType={"Add"} />
     </Screen>
   );
 };

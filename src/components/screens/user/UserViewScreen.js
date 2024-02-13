@@ -1,20 +1,20 @@
 import { StyleSheet } from "react-native";
-
+import UserView from "../../entity/users/UserView";
 import Screen from "../../layout/Screen";
 
 const UserViewScreen = ({ navigation, route }) => {
   // Initialisations ---------------------
-  const { module, onDelete, onModify } = route.params;
+  const { user, onDelete, onModify } = route.params;
 
   // State -------------------------------
   // Handlers ----------------------------
   const gotToModifyScreen = () => {
-    navigation.navigate("ModuleModifyScreen", { module, onModify });
+    navigation.navigate("UserModifyScreen", { user, onModify });
   }; // View --------------------------------
 
   return (
     <Screen>
-      <ModuleView module={module} onDelete={onDelete} onModify={gotToModifyScreen} />
+      <UserView user={user} onDelete={onDelete} onModify={gotToModifyScreen} />
     </Screen>
   );
 };

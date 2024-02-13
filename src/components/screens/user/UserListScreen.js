@@ -38,7 +38,7 @@ const UserListScreen = ({ navigation }) => {
   };
   const onModify = (user) => {
     handleModify(user);
-    navigation.navigate("UserListScreen");
+    navigation.navigate("Users");
   };
 
   const gotToViewScreen = (user) => {
