@@ -4,6 +4,7 @@ import Screen from "../../layout/Screen";
 import Action from "../../UI/Button";
 import useLoad from "../../API/useLoad";
 import UserList from "../../entity/users/UserList";
+import SearchBar from "../../UI/SearchBar";
 
 const UserListScreen = ({ navigation }) => {
   // Initialisations ---------------------
@@ -12,7 +13,8 @@ const UserListScreen = ({ navigation }) => {
 
   // State -------------------------------
   const [users, setUsers, isLoading] = useLoad(usersEndpoint);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
 
   // Handlers ----------------------------
   const handleDelete = (user) =>
@@ -30,6 +32,13 @@ const UserListScreen = ({ navigation }) => {
 
   const handleSearch = (search) => {
     setSearch(search);
+    if (search != null) {
+      setSearchResults(
+        users.filter((user) => {
+          return user.UserFirstname.includes(search) || user.UserLastname.includes(search);
+        })
+      );
+    }
   };
 
   const onDelete = (user) => {
@@ -60,7 +69,7 @@ const UserListScreen = ({ navigation }) => {
       <Action.ButtonTray>
         <Action.AddButton onClick={goToAddScreen} />
       </Action.ButtonTray>
-
+      <SearchBar placeholder={"Search user name..."} value={search} onChange={handleSearch} />
       {isLoading ? <ActivityIndicator size="large" color="#4CCBD0" style={styles.loading} /> : null}
       <UserList users={users} onSelect={gotToViewScreen} />
     </Screen>
