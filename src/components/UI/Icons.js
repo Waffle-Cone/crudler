@@ -7,7 +7,7 @@ const Submit = () => <MaterialIcons name="check" size={16} />;
 const Edit = () => <MaterialIcons name="edit" size={16} />;
 const Delete = () => <MaterialIcons name="delete" size={16} />;
 const Cancel = () => <MaterialIcons name="cancel" size={16} />;
-const SearchCancel = () => <MaterialIcons name="cancel" size={20} />;
+const SearchCancel = () => <MaterialIcons name="cancel" size={25} />;
 const Search = () => <MaterialIcons name="search" size={20} />;
 
 Icons.Add = Add;

@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { ActivityIndicator, LogBox, StyleSheet, View, TextInput } from "react-native";
+import { ActivityIndicator, LogBox, StyleSheet } from "react-native";
 import Screen from "../../layout/Screen";
 import ModuleList from "../../entity/modules/ModuleList";
 import Action from "../../UI/Button";
 import useLoad from "../../API/useLoad";
-import Icons from "../../UI/Icons";
-import SearchLayout from "../../layout/SearchLayout";
+import SearchBar from "../../UI/SearchBar";
 
 const ModuleListScreen = ({ navigation }) => {
   // Initialisations ---------------------
@@ -14,6 +13,8 @@ const ModuleListScreen = ({ navigation }) => {
 
   // State -------------------------------
   const [modules, setModules, isLoading, loadRecords] = useLoad(modulesEndpoint);
+  const [search, setSearch] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
 
   // Handlers ----------------------------
   const handleDelete = (module) =>
@@ -28,6 +29,17 @@ const ModuleListScreen = ({ navigation }) => {
   };
 
   const handleModify = (updateModule) => setModules(modules.map((module) => (module.ModuleID === updateModule.ModuleID ? updateModule : module)));
+
+  const handleSearch = (search) => {
+    setSearch(search);
+    if (search != null) {
+      setSearchResults(
+        modules.filter((item) => {
+          return item.ModuleName.includes(search);
+        })
+      );
+    }
+  };
 
   const onDelete = (module) => {
     handleDelete(module);
@@ -57,17 +69,9 @@ const ModuleListScreen = ({ navigation }) => {
       <Action.ButtonTray>
         <Action.AddButton onClick={goToAddScreen} />
       </Action.ButtonTray>
-
-      <View style={{ padding: 5 }}>
-        <SearchLayout>
-          <Icons.Search />
-          <TextInput style={styles.searchBar} placeholder={"Search..."} />
-          <Icons.SearchCancel />
-        </SearchLayout>
-      </View>
-
+      <SearchBar placeholder={"Search module name..."} value={search} onChange={handleSearch} />
       {isLoading ? <ActivityIndicator size="large" color="#4CCBD0" style={styles.loading} /> : null}
-      <ModuleList modules={modules} onSelect={gotToViewScreen} />
+      {!search ? <ModuleList modules={modules} onSelect={gotToViewScreen} /> : <ModuleList modules={searchResults} onSelect={gotToViewScreen} />}
     </Screen>
   );
 };
@@ -76,11 +80,6 @@ const styles = StyleSheet.create({
   loading: {
     flex: 1,
     justifyContent: "center",
-  },
-  searchBar: {
-    height: 50,
-    width: "80%",
-    fontSize: 20,
   },
 });
 
