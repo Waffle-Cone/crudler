@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ActivityIndicator, LogBox, StyleSheet } from "react-native";
+import { ActivityIndicator, LogBox, StyleSheet, View } from "react-native";
 import Screen from "../../layout/Screen";
 import Action from "../../UI/Button";
 import useLoad from "../../API/useLoad";
@@ -11,7 +11,8 @@ const UserListScreen = ({ navigation }) => {
   const usersEndpoint = `https://softwarehub.uk/unibase/api/users`;
 
   // State -------------------------------
-  const [users, setUsers, isLoading, loadRecords] = useLoad(usersEndpoint);
+  const [users, setUsers, isLoading] = useLoad(usersEndpoint);
+  const [search, setSearch] = useState("");
 
   // Handlers ----------------------------
   const handleDelete = (user) =>
@@ -26,6 +27,10 @@ const UserListScreen = ({ navigation }) => {
   };
 
   const handleModify = (updateUser) => setUsers(users.map((user) => (user.UserID === updateUser.UserID ? updateUser : user)));
+
+  const handleSearch = (search) => {
+    setSearch(search);
+  };
 
   const onDelete = (user) => {
     handleDelete(user);
@@ -55,6 +60,7 @@ const UserListScreen = ({ navigation }) => {
       <Action.ButtonTray>
         <Action.AddButton onClick={goToAddScreen} />
       </Action.ButtonTray>
+
       {isLoading ? <ActivityIndicator size="large" color="#4CCBD0" style={styles.loading} /> : null}
       <UserList users={users} onSelect={gotToViewScreen} />
     </Screen>

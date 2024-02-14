@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { ActivityIndicator, LogBox, StyleSheet } from "react-native";
+import { ActivityIndicator, LogBox, StyleSheet, View, TextInput } from "react-native";
 import Screen from "../../layout/Screen";
 import ModuleList from "../../entity/modules/ModuleList";
 import Action from "../../UI/Button";
 import useLoad from "../../API/useLoad";
+import Icons from "../../UI/Icons";
+import SearchLayout from "../../layout/SearchLayout";
 
 const ModuleListScreen = ({ navigation }) => {
   // Initialisations ---------------------
@@ -55,6 +57,15 @@ const ModuleListScreen = ({ navigation }) => {
       <Action.ButtonTray>
         <Action.AddButton onClick={goToAddScreen} />
       </Action.ButtonTray>
+
+      <View style={{ padding: 5 }}>
+        <SearchLayout>
+          <Icons.Search />
+          <TextInput style={styles.searchBar} placeholder={"Search..."} />
+          <Icons.SearchCancel />
+        </SearchLayout>
+      </View>
+
       {isLoading ? <ActivityIndicator size="large" color="#4CCBD0" style={styles.loading} /> : null}
       <ModuleList modules={modules} onSelect={gotToViewScreen} />
     </Screen>
@@ -65,6 +76,11 @@ const styles = StyleSheet.create({
   loading: {
     flex: 1,
     justifyContent: "center",
+  },
+  searchBar: {
+    height: 50,
+    width: "80%",
+    fontSize: 20,
   },
 });
 
