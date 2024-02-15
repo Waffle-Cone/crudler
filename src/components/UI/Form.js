@@ -18,12 +18,13 @@ const Form = ({ children, submitType, onSubmit, onCancel }) => {
   );
 };
 
-const InputText = ({ label, value, onChange, prompt, keyboardType }) => {
+const InputText = ({ label, value, onChange, prompt, keyboardType, error }) => {
   return (
     <View style={styles.item}>
       <Text style={styles.itemLabel}>{label}</Text>
       {prompt ? <Text style={styles.itemPrompt}>{prompt}</Text> : null}
       <TextInput style={styles.itemTextInput} value={value} onChangeText={onChange} keyboardType={keyboardType} />
+      <Text style={styles.error}>{error}</Text>
     </View>
   );
 };
@@ -76,6 +77,10 @@ const styles = StyleSheet.create({
     color: "grey",
   },
   itemPrompt: {
+    fontSize: 15,
+    color: "grey",
+  },
+  error: {
     fontSize: 15,
     color: "red",
   },

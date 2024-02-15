@@ -43,12 +43,12 @@ const UserListScreen = ({ navigation }) => {
 
   const onDelete = (user) => {
     handleDelete(user);
-    navigation.goBack();
+    navigation.navigate("Users");
   };
 
   const onAdd = (user) => {
     handleAdd(user);
-    navigation.goBack();
+    navigation.navigate("Users");
   };
   const onModify = (user) => {
     handleModify(user);
@@ -71,7 +71,7 @@ const UserListScreen = ({ navigation }) => {
       </Action.ButtonTray>
       <SearchBar placeholder={"Search user name..."} value={search} onChange={handleSearch} />
       {isLoading ? <ActivityIndicator size="large" color="#4CCBD0" style={styles.loading} /> : null}
-      <UserList users={users} onSelect={gotToViewScreen} />
+      {!search ? <UserList users={users} onSelect={gotToViewScreen} /> : <UserList users={searchResults} onSelect={gotToViewScreen} />}
     </Screen>
   );
 };

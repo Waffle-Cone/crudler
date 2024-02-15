@@ -43,12 +43,12 @@ const ModuleListScreen = ({ navigation }) => {
 
   const onDelete = (module) => {
     handleDelete(module);
-    navigation.goBack();
+    navigation.navigate("Modules");
   };
 
   const onAdd = (module) => {
     handleAdd(module);
-    navigation.goBack();
+    navigation.navigate("Modules");
   };
   const onModify = (module) => {
     handleModify(module);
