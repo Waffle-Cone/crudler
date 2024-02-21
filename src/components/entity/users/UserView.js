@@ -17,7 +17,7 @@ const UserView = ({ user, onDelete, onModify }) => {
   // View --------------------------------
   return (
     <View style={styles.container}>
-      <FullWidthImage source={{ uri: user.UserImageURL }} style={styles.image} />
+      <FullWidthImage source={{ uri: user.UserImageURL }} style={styles.image} width={256} height={256} />
 
       <View style={styles.infoTray}>
         <Text style={styles.boldtext}>{user.UserEmail}</Text>
@@ -44,6 +44,8 @@ const styles = StyleSheet.create({
     gap: 5,
   },
   image: {
+    width: 256,
+    height: 256,
     borderRadius: 3,
   },
   text: {
