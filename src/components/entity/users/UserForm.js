@@ -64,13 +64,13 @@ const UserForm = ({ selectedUser, onCancel, onSubmit, submitType }) => {
   userTypes.forEach((type) => typesOfUsers.push({ value: type.UsertypeID, label: type.UsertypeName })); // making the recived usertypes into something we can use value and label pairs
   years.forEach((year) => yearSelection.push({ value: year.YearID, label: year.YearName }));
 
-  yearSelection.push({ value: 90, label: "N/A" });
+  yearSelection.push({ value: 90, label: "N/A" }); // for teachers
   // Handlers ----------------------------
 
   const errorCheck = (user) => {
     let isUserValid = true;
     Object.keys(user).forEach((key) => {
-      //console.log(`${key}  ${!user[key]}`);
+      //truthy error!!!
       if (key === "UserRegistered") {
         errors[key] = null;
       } else if (!user[key]) {
