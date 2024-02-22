@@ -5,6 +5,15 @@ import Action from "../../UI/Button";
 const UserView = ({ user, onDelete, onModify }) => {
   // Initialisations ---------------------
   const knumber = user.UserEmail.split("@")[0]; // get the K number the student from email
+
+  if (user.UserUsertypeID === 1) {
+    user.UserLevel = 1;
+    user.UserYearID = 90;
+    user.UserYearName = "N/A";
+    user.UserImageURL =
+      "https://images.generated.photos/IitdqDaBBrr4auYZFuuC_dplp3OtwU2cCuN4q35rN8M/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92Ml8w/NDcyMTg5LmpwZw.jpg";
+  }
+
   // State -------------------------------
   // Handlers ----------------------------
   const handleDelete = () => onDelete(user);
@@ -14,21 +23,11 @@ const UserView = ({ user, onDelete, onModify }) => {
       { text: "Cancel" },
       { text: "Delete", onPress: handleDelete },
     ]);
+
   // View --------------------------------
   return (
     <View style={styles.container}>
-      {!user.UserID === 820 ? (
-        <FullWidthImage source={{ uri: user.UserImageURL }} style={styles.image} width={256} height={256} />
-      ) : (
-        <FullWidthImage
-          source={{
-            uri: "https://images.generated.photos/IitdqDaBBrr4auYZFuuC_dplp3OtwU2cCuN4q35rN8M/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92Ml8w/NDcyMTg5LmpwZw.jpg",
-          }}
-          style={styles.image}
-          width={256}
-          height={256}
-        />
-      )}
+      <FullWidthImage source={{ uri: user.UserImageURL }} style={styles.image} width={256} height={256} />
 
       <View style={styles.infoTray}>
         <Text style={styles.boldtext}>{user.UserEmail}</Text>

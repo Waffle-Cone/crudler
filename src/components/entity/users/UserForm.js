@@ -10,6 +10,7 @@ const defaultUser = {
   UserLastname: null,
   UserEmail: null,
   UserLevel: 3,
+  UserRegistered: null,
   UserYearID: 1, // the selector starts on "2022-23" = Default
   UserUsertypeID: 1, // the selector starts on staff = Default
   UserImageURL: null,
@@ -22,6 +23,13 @@ const UserForm = ({ selectedUser, onCancel, onSubmit, submitType }) => {
   defaultUser.UserID = Math.floor(100000 + Math.random() * 900000);
   defaultUser.UserImageURL =
     "https://images.generated.photos/MEhzHfD0AtIoLUVj5R4QKAmyaS87QnLhEpGvxxjwVcI/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/MTg5NTA2LmpwZw.jpg";
+
+  //Teachers have to have a special year id and year name set up
+  if (selectedUser.UserUsertypeID === 1) {
+    selectedUser.UserLevel = 1;
+    selectedUser.UserYearID = 90;
+    selectedUser.UserYearName = "N/A";
+  }
 
   const levels = [
     { value: 3, label: "3 (Foundation)" },
@@ -56,12 +64,16 @@ const UserForm = ({ selectedUser, onCancel, onSubmit, submitType }) => {
   userTypes.forEach((type) => typesOfUsers.push({ value: type.UsertypeID, label: type.UsertypeName })); // making the recived usertypes into something we can use value and label pairs
   years.forEach((year) => yearSelection.push({ value: year.YearID, label: year.YearName }));
 
+  yearSelection.push({ value: 90, label: "N/A" });
   // Handlers ----------------------------
 
   const errorCheck = (user) => {
     let isUserValid = true;
     Object.keys(user).forEach((key) => {
-      if (!user[key]) {
+      //console.log(`${key}  ${!user[key]}`);
+      if (key === "UserRegistered") {
+        errors[key] = null;
+      } else if (!user[key]) {
         errors[key] = errorMessage[key];
         isUserValid = false;
       } else {
@@ -93,8 +105,11 @@ const UserForm = ({ selectedUser, onCancel, onSubmit, submitType }) => {
       setUser({ ...user, [field]: value, [correspondingField]: correspondingValue });
     }
   };
+
   const handleSubmit = () => {
     const check = errorCheck(user);
+    console.log(errors);
+    console.log(user);
     setErrors({ ...errors });
     if (check) {
       onSubmit(user);
